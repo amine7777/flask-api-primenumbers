@@ -1,0 +1,23 @@
+---
+
+- name: Install python and python pip
+  yum:
+    name:
+      - epel-release
+      - python-pip
+      - python-devel
+    state: present
+
+- name: Install flask with pip
+  command: pip install Flask
+
+- name: Create a folder for the API
+  file:
+    path: /tmp/hello_api
+    state: directory
+
+- name: Parse the api folder
+  template:
+    src: templates/hello_api.j2.py
+    dest: /tmp/hello_api/hello_api.py
+    force: yes
